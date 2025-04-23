@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors - Appointment Management</title>
+    <style>
+        body {
+            background-image: url('file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/doct2.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            font-size: 24px;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .doctor {
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 220px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .doctor:hover {
+            transform: scale(1.05);
+        }
+
+        .doctor img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ff5f6d;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #ff3a3a;
+        }
+    </style>
+</head>
+<body>
+    <header id="hospital-name">Doctors Available</header>
+
+    <section id="doctor-list">
+        <!-- Doctors will be dynamically generated here -->
+    </section>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const hospital = urlParams.get('hospital') || 'Unknown Hospital';
+
+        const doctorsByHospital = {
+            "City Hospital": [
+                { name: "Dr. Prathvi", specialty: "Dentist", image: "WhatsApp Image 2025-04-22 at 14.16.41_e329b54c.jpg" },
+                { name: "Dr. Nidhi", specialty: "Cardiologist", image: "WhatsApp Image 2025-04-22 at 14.16.38_a9e27498.jpg" }
+            ],
+            "Care Clinic": [
+                { name: "Dr. Bharath", specialty: "Orthodontist", image: "WhatsApp Image 2025-04-22 at 14.16.39_ae440cee.jpg" },
+                { name: "Dr. Pramod  ", specialty: "Neurologist", image: "WhatsApp Image 2025-04-22 at 14.16.42_3c60c675.jpg" }
+            ],
+            "LifeCare Center": [
+                { name: "Dr. Nagendra", specialty: "Periodontist", image: "file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/periodontist1.jpg" },
+                { name: "Dr. Hema", specialty: "Neurologist", image: "file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/neuro2.jpg" }
+            ],
+            "Mysuru General": [
+                { name: "Dr. Jiya", specialty: "Dermatologist", image: "file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/dermatologist1.jpg" },
+                { name: "Dr. Vaishnavi", specialty: "Ophthalmologist", image: "file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/ophthalmologist1.jpg" }
+            ],
+            "Apollo Clinic": [
+                { name: "Dr. Prajwal ", specialty: "Pediatrician", image: "WhatsApp Image 2025-04-22 at 14.16.43_3ca07133.jpg" },
+                { name: "Dr. Pavan", specialty: "Neurologist", image: "jiojiuyug.jpeg" }
+            ]
+        };
+
+        const header = document.getElementById('hospital-name');
+        const doctorList = document.getElementById('doctor-list');
+
+        header.textContent = `Doctors at ${hospital}`;
+        const doctors = doctorsByHospital[hospital];
+
+        if (doctors) {
+            doctors.forEach(doctor => {
+                const div = document.createElement("div");
+                div.className = "doctor";
+                div.innerHTML = `
+                    <a href="appointment.html?doctor=${encodeURIComponent(doctor.name)}&hospital=${encodeURIComponent(hospital)}">
+                        <img src="${doctor.image}" alt="${doctor.name}">
+                        <p><strong>${doctor.name}</strong></p>
+                        <p>${doctor.specialty}</p>
+                        <p>Click to book appointment</p>
+                    </a>
+                `;
+                doctorList.appendChild(div);
+            });
+        } else {
+            doctorList.innerHTML = `<p>No doctors found for ${hospital}. Please check the hospital name or try another selection.</p>`;
+        }
+    </script>
+</body>
+</html>

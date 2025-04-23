@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mode of Payment - Appointment Management</title>
+    <style>
+        body {
+            background-image: url('file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/doct2.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            color: black;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        button {
+            background: #ff5f6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #cc4c54;
+        }
+    </style>
+</head>
+<body>
+    <header>Choose Payment Mode</header>
+    <section>
+        <form action="confirmation.html">
+            <p id="total-amount">Total Amount: ₹2000</p>
+
+            <label for="payment-mode">Select Payment Method:</label>
+            <select id="payment-mode" required>
+                <option value="upi">UPI</option>
+                <option value="net-banking">Net Banking</option>
+                <option value="credit-card">Credit Card</option>
+                <option value="debit-card">Debit Card</option>
+            </select>
+
+            <button type="submit">Confirm Payment</button>
+        </form>
+    </section>
+
+    <script>
+        // Retrieve total amount from URL and update the page
+        const urlParams = new URLSearchParams(window.location.search);
+        const totalAmount = urlParams.get('total');
+        if (totalAmount) {
+            document.getElementById("total-amount").textContent = `Total Amount: ₹${totalAmount}`;
+        }
+    </script>
+</body>
+</html>

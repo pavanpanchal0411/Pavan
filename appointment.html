@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        body {
+            background-image: url('file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/doct2.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            color: black;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #ff5f6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #cc4c54;
+        }
+    </style>
+</head>
+<body>
+    <header>Book Your Appointment</header>
+    <section>
+        <form onsubmit="storeAppointment(event)">
+            <label for="date">Appointment Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Appointment Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <button type="submit">Next</button>
+        </form>
+    </section>
+
+    <script>
+        function storeAppointment(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const doctor = new URLSearchParams(window.location.search).get("doctor");
+            const hospital = new URLSearchParams(window.location.search).get("hospital");
+
+            if (date && time && doctor && hospital) {
+                const appointmentDetails = { date, time, doctor, hospital };
+                localStorage.setItem("upcomingAppointment", JSON.stringify(appointmentDetails));
+
+                window.location.href = "prescription.html"; // Redirect to next step
+            } else {
+                alert("Please ensure all fields are filled before proceeding.");
+            }
+        }
+    </script>
+</body>
+</html>

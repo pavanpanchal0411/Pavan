@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Hospital</title>
+    <style>
+        body {
+            background-image: url('file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/doct2.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .option {
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 200px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .option:hover {
+            transform: scale(1.05);
+        }
+
+        .option img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>Select Your Hospital</header>
+    <section id="hospital-list">
+        <!-- Hospitals dynamically inserted here -->
+    </section>
+
+    <script>
+        const hospitals = [
+            { name: "Ramaiah Memorial Hospital", image: "Ramaiah-Memorial-Hospital.jpg" },
+            { name: "Care Clinic", image: "ssssssss.jpg" },
+            { name: "Apollo Clinic", image: "Apollo_Clinic.png" },
+            { name: "Mysuru General", image: "images.jpeg" },
+            { name: "LifeCare Center", image: "LifeCare_Center.png" }
+        ];
+
+        const hospitalList = document.getElementById("hospital-list");
+
+        hospitals.forEach(hospital => {
+            const div = document.createElement("div");
+            div.className = "option";
+            div.innerHTML = `
+                <a href="doctors.html?hospital=${encodeURIComponent(hospital.name)}">
+                    <img src="${hospital.image}" alt="${hospital.name}">
+                    <p><strong>${hospital.name}</strong></p>
+                </a>
+            `;
+            hospitalList.appendChild(div);
+        });
+    </script>
+</body>
+</html>

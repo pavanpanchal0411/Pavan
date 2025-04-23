@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select City</title>
+    <style>
+        body {
+            background-image: url('file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/doct2.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .option {
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            transform: scale(1.05);
+        }
+
+        .option img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>Select Your City</header>
+    <section id="city-list">
+        <!-- Cities dynamically inserted here -->
+    </section>
+
+    <script>
+        const cities = [
+            { name: "Bengaluru", image: "beng.png" },
+            { name: "Mysuru", image: "mysuru.png" },
+            { name: "Hubli", image: "hubli.png" }
+        ];
+
+        const cityList = document.getElementById("city-list");
+
+        cities.forEach(city => {
+            const div = document.createElement("div");
+            div.className = "option";
+            div.innerHTML = `
+                <a href="hospital.html?city=${encodeURIComponent(city.name)}">
+                    <img src="${city.image}" alt="${city.name}">
+                    <p><strong>${city.name}</strong></p>
+                </a>
+            `;
+            cityList.appendChild(div);
+        });
+    </script>
+</body>
+</html>

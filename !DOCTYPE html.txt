@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mode of Payment - Appointment Management</title>
+    <style>
+        body {
+            background-image: url('file:///F:/app%20magement%20system/doct2.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 350px;
+            color: black;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        button {
+            background: #ff5f6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #cc4c54;
+        }
+
+        .payment-details {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #qr-code {
+            width: 200px;
+            height: 200px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>Choose Payment Mode</header>
+    <section>
+        <form id="paymentForm" onsubmit="redirectToConfirmation(event)">
+            <p id="total-amount">Total Amount: ₹600.00</p>
+
+            <label for="payment-mode">Select Payment Method:</label>
+            <select id="payment-mode" onchange="showPaymentFields()" required>
+                <option value="">Select</option>
+                <option value="upi">UPI</option>
+                <option value="net-banking">Net Banking</option>
+                <option value="credit-card">Credit Card</option>
+                <option value="debit-card">Debit Card</option>
+            </select>
+
+            <!-- UPI Payment -->
+            <div id="upi-details" class="payment-details">
+                <p>Scan this QR Code to Pay:</p>
+                <img id="qr-code" src="images/upi-qr.png" alt="UPI QR Code">
+            </div>
+
+            <!-- Card Payment -->
+            <div id="card-details" class="payment-details">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" maxlength="16" placeholder="Enter Card Number" required>
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                <label for="cvv">CVV:</label>
+                <input type="password" id="cvv" maxlength="3" placeholder="Enter CVV" required>
+            </div>
+
+            <!-- Net Banking -->
+            <div id="net-banking-details" class="payment-details">
+                <label for="bank-name">Bank Name:</label>
+                <input type="text" id="bank-name" placeholder="Enter Bank Name" required>
+                <label for="account-holder">Account Holder Name:</label>
+                <input type="text" id="account-holder" placeholder="Enter Name" required>
+                <label for="username">Net Banking Username:</label>
+                <input type="text" id="username" placeholder="Enter Username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter Password" required>
+            </div>
+
+            <button type="submit">Confirm Payment</button>
+        </form>
+    </section>
+
+    <script>
+        function showPaymentFields() {
+            const paymentMode = document.getElementById("payment-mode").value;
+
+            document.getElementById("upi-details").style.display = "none";
+            document.getElementById("qr-code").style.display = "none";
+            document.getElementById("card-details").style.display = "none";
+            document.getElementById("net-banking-details").style.display = "none";
+
+            if (paymentMode === "upi") {
+                document.getElementById("upi-details").style.display = "block";
+                document.getElementById("qr-code").style.display = "block";
+            } else if (paymentMode === "credit-card" || paymentMode === "debit-card") {
+                document.getElementById("card-details").style.display = "block";
+            } else if (paymentMode === "net-banking") {
+                document.getElementById("net-banking-details").style.display = "block";
+            }
+        }
+
+        function redirectToConfirmation(event) {
+            event.preventDefault();
+
+            const paymentMode = document.getElementById("payment-mode").value;
+            if (!paymentMode) {
+                alert("Please select a payment method before proceeding.");
+                return;
+            }
+
+            if ((paymentMode === "credit-card" || paymentMode === "debit-card") &&
+                (!document.getElementById("card-number").value ||
+                !document.getElementById("expiry-date").value ||
+                !document.getElementById("cvv").value)) {
+                alert("Please fill in all card details.");
+                return;
+            }
+
+            if (paymentMode === "net-banking" &&
+                (!document.getElementById("bank-name").value ||
+                !document.getElementById("account-holder").value ||
+                !document.getElementById("username").value ||
+                !document.getElementById("password").value)) {
+                alert("Please fill in all net banking details.");
+                return;
+            }
+
+            setTimeout(() => {
+                window.location.href = "confirmation.html";
+            }, 500);
+        }
+    </script>
+</body>
+</html>

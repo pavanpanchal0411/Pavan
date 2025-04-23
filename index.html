@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Appointment Management</title>
+    <style>
+        body {
+            background-image: url('file:///C:/Users/PAVAN/Desktop/New%20folder%20(3)/doct2.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+        }
+
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 800px;
+            color: black;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ff5f6d;
+        }
+
+        .appointment {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background: #ff5f6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>Welcome, Pavan!</header>
+    
+    <nav>
+        <a href="appointment.html">Book Appointment</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="payment.html">Make Payment</a>
+    </nav>
+
+    <section>
+        <h2>Upcoming Appointment</h2>
+        <div class="appointment" id="upcoming-appointment">
+            <p>No upcoming appointment found.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Appointment History</h2>
+        <div class="appointment">
+            <p><strong>Date:</strong> April 10, 2025</p>
+            <p><strong>Doctor:</strong> Dr. Emily Harris</p>
+            <p><strong>Prescription:</strong> Uploaded</p>
+        </div>
+        <div class="appointment">
+            <p><strong>Date:</strong> March 15, 2025</p>
+            <p><strong>Doctor:</strong> Dr. Michael Johnson</p>
+            <p><strong>Prescription:</strong> Not Uploaded</p>
+        </div>
+    </section>
+
+    <button onclick="window.location.href='disease.html'">Book New Appointment</button>
+
+    <script>
+        // Retrieve upcoming appointment details from local storage
+        const upcomingAppointment = JSON.parse(localStorage.getItem("upcomingAppointment"));
+
+        if (upcomingAppointment) {
+            document.getElementById("upcoming-appointment").innerHTML = `
+                <p><strong>Date:</strong> ${upcomingAppointment.date}</p>
+                <p><strong>Time:</strong> ${upcomingAppointment.time}</p>
+                <p><strong>Doctor:</strong> ${upcomingAppointment.doctor}</p>
+                <p><strong>Hospital:</strong> ${upcomingAppointment.hospital}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

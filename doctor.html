@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Doctor</title>
+</head>
+<body>
+    <header>Doctors Available</header>
+    <section id="doctor-list"></section>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const hospital = urlParams.get('hospital');
+
+        const doctorsByHospital = {
+            "City Hospital": [
+                { name: "Dr. John Smith", specialty: "Dentist", image: "dentist.jpg" },
+                { name: "Dr. Emily Harris", specialty: "Cardiologist", image: "cardio.jpg" }
+            ]
+        };
+
+        const doctorList = document.getElementById("doctor-list");
+        doctorsByHospital[hospital].forEach(doctor => {
+            doctorList.innerHTML += `<div><img src="${doctor.image}" width="150"><p>${doctor.name} - ${doctor.specialty}</p></div>`;
+        });
+    </script>
+</body>
+</html>
